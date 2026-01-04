@@ -1,19 +1,7 @@
-"""
-URL configuration for smart_care project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+from dj_rest_auth.registration.views import SocialLoginView
+
+from .views import GoogleLogin,GithubLogin
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
@@ -25,6 +13,16 @@ urlpatterns = [
     path('patient/',include('patient.urls')),
     path('service/',include('service.urls')),
     path('doctor/',include('doctor.urls')),
-    path('appointment/',include('appointment.urls'))
+    path('appointment/',include('appointment.urls')),
+
+     path("auth/", include("dj_rest_auth.urls")),
+    # path("auth/registration/", include("dj_rest_auth.registration.urls")),
+    path('accounts/', include("allauth.urls")),
+   path("google/", GoogleLogin.as_view(), name="google_login"),
+    path(
+        "github/",
+        GithubLogin.as_view(), name='github_login'),
+   
+    
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

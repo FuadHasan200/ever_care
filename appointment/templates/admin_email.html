@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Email</title>
+</head>
+<body>
+    <h3>Hello {{user.first_name}} {{user.last_name}}</h3>
+    <p>Hope you are doing well.You are requested for an online appointment with {{doctor.user.first_name}} {{doctor.user.last_name}}</p>
+    <p>Your doctor is able to meet with you. Join the below link as soon as possible</p>
+    <p>Meet Link: <a href="{{doctor.meet_link}}" target="_blank">{{doctor.meet_link}}</a></p>
+    <p>Thanks</p>
+    <p>ever_care</p>
+
+</body>
+</html>

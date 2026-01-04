@@ -23,11 +23,12 @@ class AvailableTime(models.Model):
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  
     specialization = models.ManyToManyField(Specialization)
-    desigantion = models.ManyToManyField(Designation)
+    designation = models.ManyToManyField(Designation)
     available_time = models.ManyToManyField(AvailableTime)
     fee = models.IntegerField()
     meet_link = models.CharField(max_length=100)
-
+    image = models.ImageField(upload_to='doctor/images/',null=True,
+    blank=True)
     def __str__(self):
         return f"Dr. {self.user.first_name} {self.user.last_name}"
 

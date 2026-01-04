@@ -21,15 +21,19 @@ class RegistrationSerializer(serializers.ModelSerializer):
         last_name = self.validated_data['last_name']
         password1 = self.validated_data['password']
         password2 = self.validated_data['confirm_password']
-
+        
         if password1 != password2:
-            raise serializers.ValidationError({'error':"password doesn't matched"})
+            raise serializers.ValidationError({'confirm_password': ["Password doesn't match"]})
         
         if User.objects.filter(email=email).exists():
-            raise serializers.ValidationError({'error':'email already exists'})
+            raise serializers.ValidationError({'email': ["Email already exists"]})
         
         account = User(username=username, email=email, first_name=first_name, last_name=last_name)
         account.set_password(password1)
         account.is_active = False
         account.save()
         return account
+    
+class loginSerializer(serializers.Serializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)

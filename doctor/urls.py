@@ -10,5 +10,6 @@ router.register('available_time',AvailabletimeViewSet)
 router.register('reviews',ReviewViewSet)
 
 urlpatterns = [
-    path('',include(router.urls))
+    path('',include(router.urls)),
+    
 ]
