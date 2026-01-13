@@ -15,11 +15,13 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://ever-care-frontend.vercel.app"
     
 ]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "https://ever-care-drf.onrender.com",
+    "https://ever-care-frontend.vercel.app"
 ]
 
 # Application definition

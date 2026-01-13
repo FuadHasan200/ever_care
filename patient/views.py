@@ -61,9 +61,9 @@ def activate(request, uid64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        return redirect("http://localhost:3000/login")
+        return redirect("https://ever-care-frontend.vercel.app")
     else:
-        return redirect(" http://localhost:3000/signup")
+        return redirect("https://ever-care-frontend.vercel.app/signup")
     
 class UserloginApiView(APIView):
     def post(self,request):
