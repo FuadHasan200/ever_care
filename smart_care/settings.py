@@ -19,6 +19,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    "https://ever-care-drf.onrender.com",
 ]
 
 # Application definition
