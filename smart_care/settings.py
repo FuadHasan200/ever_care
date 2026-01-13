@@ -13,7 +13,13 @@ SECRET_KEY = 'django-insecure-$xwrw)fg%hd*!r%iba!%rjm*!otj@&@hi17mybua98^=%i&(*s
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = []
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    
+]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+]
 
 # Application definition
 
@@ -69,7 +75,7 @@ ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_USERNAME_REQUIRED = False
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-frontend = env("frontend")
+
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'fuad',
