@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 import environ
+from django.conf import settings
 from rest_framework import viewsets
 env = environ.Env()
 environ.Env.read_env()
@@ -60,9 +61,9 @@ def activate(request, uid64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        return redirect('http://localhost:3000/login')
+        return redirect("http://localhost:3000/login")
     else:
-        return redirect('http://localhost:3000/signup')
+        return redirect(" http://localhost:3000/signup")
     
 class UserloginApiView(APIView):
     def post(self,request):

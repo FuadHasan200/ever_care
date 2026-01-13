@@ -7,13 +7,17 @@ class PatientSerialzer(serializers.ModelSerializer):
     class Meta:
         model = Patient
         fields = '__all__'
+    
+        extra_kwargs = {
+            'image': {'required': False}
+        }
 
 class RegistrationSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(required=True)
     class Meta:
         model = User
         fields = ['username','first_name','last_name','email','password','confirm_password']
-    
+        
     def save(self):
         username = self.validated_data['username']
         email = self.validated_data['email']

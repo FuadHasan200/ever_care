@@ -4,10 +4,10 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 # Register your models here.
 class AppointmentAdmin(admin.ModelAdmin):
-    list_display = ['patient_name','doctor_name','appointment_type','appointment_status','symptom','time','cancel']
+    list_display = ['patient_name','doctor_name','appointment_type','appointment_status','symptom','time','cancel','date']
 
     def patient_name(self,obj):
-        return obj.patient.user.first_name
+        return obj.patient.user.username
     
     def doctor_name(self,obj):
         return obj.doctor.user.first_name

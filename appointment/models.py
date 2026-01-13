@@ -1,6 +1,7 @@
 from django.db import models
 from patient.models import Patient
 from doctor.models import Doctor,AvailableTime
+from django.utils import timezone
 # Create your models here.
 APPOINTMENT_TYPE = [
     ('Pending','Pending'),
@@ -19,3 +20,25 @@ class Appointment(models.Model):
     symptom = models.TextField()
     time = models.ForeignKey(AvailableTime, on_delete=models.CASCADE)
     cancel = models.BooleanField(default=False)
+    date = models.DateTimeField(default=timezone.now)
+    
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["patient", "doctor", "time","date"],
+                name="unique_patient_doctor_time_date"
+            ),
+
+            # models.UniqueConstraint(
+            # fields=['doctor', 'time', 'date'],
+            # name='unique_doctor_time_date'
+            # ),
+
+            models.UniqueConstraint(
+            fields=['patient', 'time', 'date'],
+            name='unique_patient_time_date'
+            ),
+            
+
+        ]

@@ -26,9 +26,8 @@ class Doctor(models.Model):
     designation = models.ManyToManyField(Designation)
     available_time = models.ManyToManyField(AvailableTime)
     fee = models.IntegerField()
-    meet_link = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='doctor/images/',null=True,
-    blank=True)
+    meet_link = models.CharField(max_length=100, default='http://meet.com')
+    image = models.ImageField(upload_to='doctor/images/')
     def __str__(self):
         return f"Dr. {self.user.first_name} {self.user.last_name}"
 
@@ -47,6 +46,10 @@ class Review(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     rating = models.CharField(choices=STAR_CHOICES, max_length=10)
 
+    class Meta:
+        unique_together = ('reviewer', 'doctor')
+
     def __str__(self):
         return f"Patient: {self.reviewer.user.first_name} Dr.{self.doctor.user.first_name}"
     
+   
