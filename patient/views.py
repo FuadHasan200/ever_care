@@ -42,7 +42,7 @@ class PatientRegistrationViewset(APIView):
             print("token ",token)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             print("uid ",uid)
-            confirm_link = f"https://ever-care-drf.onrender.com/patient/active/{uid}/{token}"
+            confirm_link = f"{settings.FRONTEND_URL}/patient/active/{uid}/{token}"
             email_subject = 'Confirm Your Email'
             email_body = render_to_string('confirm_email.html',{'confirm_link':confirm_link})
             email = EmailMultiAlternatives(email_subject,'',to=[user.email])
@@ -59,11 +59,11 @@ def activate(request, uid64, token):
         user = None
     
     if user is not None and default_token_generator.check_token(user, token):
-        # user.is_active = True
+        user.is_active = True
         user.save()
-        return redirect("https://ever-care-frontend.vercel.app")
+        return redirect(settings.FRONTEND_URL)
     else:
-        return redirect("https://ever-care-frontend.vercel.app/signup")
+        return redirect(f"{settings.FRONTEND_URL}/signup")
     
 class UserloginApiView(APIView):
     def post(self,request):
@@ -139,27 +139,4 @@ class GoogleLogin(SocialLoginView):
                 "email": user.email
             }
         })
-    # for debuging purpose
-    # def post(self, request):
-    #     token = request.data.get("id_token")
-
-    #     print("TOKEN RECEIVED:", token[:40])
-    #     print("ENV CLIENT_ID:", env("clientId"))
-
-    #     try:
-    #         info = id_token.verify_oauth2_token(
-    #             token,
-    #             requests.Request(),
-    #             env("clientId"),
-    #         )
-    #         print("GOOGLE INFO:", info)
-    #     except Exception as e:
-    #         print("GOOGLE VERIFY ERROR:", e)
-    #         return Response({"error": "Invalid Google token"}, status=400)
-
-    #     return Response({"success": True})
-
-
-
-
-
+  
